@@ -1,0 +1,12 @@
+﻿.modal-dialog-width {
+    max-width:80vw!important;
+}
+
+.modal-content-height {
+    height:90vh!important;
+}
+
+iframe {
+    width:100%;
+    height:100%;
+}

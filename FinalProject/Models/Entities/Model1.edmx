@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar(max)" />
+          <Property Name="Middlename" Type="nvarchar(max)" />
+          <Property Name="Lastname" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Birthdate" Type="date" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Admin_Acc">
+          <Key>
+            <PropertyRef Name="Ad_id" />
+          </Key>
+          <Property Name="Ad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="IdCampus" />
+          </Key>
+          <Property Name="IdCampus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Campus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Concerns">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year" Type="nvarchar" MaxLength="10" />
+          <Property Name="Section" Type="nvarchar" MaxLength="20" />
+          <Property Name="SchoolYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="Semester" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit" Type="int" />
+          <Property Name="GradeValue" Type="float" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Infraction">
+          <Key>
+            <PropertyRef Name="Infr_Id" />
+          </Key>
+          <Property Name="Infr_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Library" Type="nvarchar" MaxLength="50" />
+          <Property Name="L_inf" Type="nvarchar" MaxLength="50" />
+          <Property Name="Health" Type="nvarchar" MaxLength="50" />
+          <Property Name="H_inf" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Osas" Type="nvarchar" MaxLength="50" />
+          <Property Name="O_inf" Type="nvarchar" MaxLength="50" />
+          <Property Name="Registrar" Type="nvarchar" MaxLength="50" />
+          <Property Name="R_inf" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LogAct">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="TimeIn" Type="datetime" />
+          <Property Name="TimeOut" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar(max)" />
+          <Property Name="Firstname" Type="nvarchar(max)" />
+          <Property Name="Middlename" Type="nvarchar(max)" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Sex" Type="nchar" MaxLength="10" />
+          <Property Name="Age" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="Contact_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pass_Reset">
+          <Key>
+            <PropertyRef Name="PR_id" />
+          </Key>
+          <Property Name="PR_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="IdProf" />
+          </Key>
+          <Property Name="IdProf" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="IdSection" />
+          </Key>
+          <Property Name="IdSection" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Section" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="IdStudent" />
+          </Key>
+          <Property Name="IdStudent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Middlename" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Age" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="Contact_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdProfessor" Type="int" />
+          <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="YearLevel">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearLevel" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="RegistrationModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin_Acc" EntityType="Self.Admin_Acc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Concerns" EntityType="Self.Concerns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Infraction" EntityType="Self.Infraction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogAct" EntityType="Self.LogAct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pass_Reset" EntityType="Self.Pass_Reset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YearLevel" EntityType="Self.YearLevel" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" FixedLength="false" Unicode="true" MaxLength="20" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="0" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admin_Acc">
+          <Key>
+            <PropertyRef Name="Ad_id" />
+          </Key>
+          <Property Name="Ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Concern">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentnum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Infraction">
+          <Key>
+            <PropertyRef Name="Infr_Id" />
+          </Key>
+          <Property Name="Infr_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentnum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Library" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="L_inf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Health" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="H_inf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Osas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="O_inf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registrar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="R_inf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LogAct">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeIn" Type="DateTime" Precision="3" />
+          <Property Name="TimeOut" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Age" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Contact_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Studentnum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pass_Reset">
+          <Key>
+            <PropertyRef Name="PR_id" />
+          </Key>
+          <Property Name="PR_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="RegistrationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Admin_Acc" EntityType="Self.Admin_Acc" />
+          <EntitySet Name="Calendars" EntityType="Self.Calendar" />
+          <EntitySet Name="Concerns" EntityType="Self.Concern" />
+          <EntitySet Name="Infractions" EntityType="Self.Infraction" />
+          <EntitySet Name="LogActs" EntityType="Self.LogAct" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Pass_Reset" EntityType="Self.Pass_Reset" />
+          <EntitySet Name="Grades" EntityType="RegistrationModel.Grade" />
+          <EntitySet Name="Campus" EntityType="RegistrationModel.Campu" />
+          <EntitySet Name="Professors" EntityType="RegistrationModel.Professor" />
+          <EntitySet Name="Sections" EntityType="RegistrationModel.Section" />
+          <EntitySet Name="Subjects" EntityType="RegistrationModel.Subject" />
+          <EntitySet Name="YearLevels" EntityType="RegistrationModel.YearLevel" />
+          <EntitySet Name="StudentInfoes" EntityType="RegistrationModel.StudentInfo" />
+        </EntityContainer>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentnum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="Int32" />
+          <Property Name="GradeValue" Type="Double" />
+          <Property Name="SchoolYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Semester" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Campu">
+          <Key>
+            <PropertyRef Name="IdCampus" />
+          </Key>
+          <Property Name="IdCampus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Campus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="IdProf" />
+          </Key>
+          <Property Name="IdProf" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="IdSection" />
+          </Key>
+          <Property Name="IdSection" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Section1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdProfessor" Type="Int32" />
+          <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="YearLevel">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearLevel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="IdStudent" />
+          </Key>
+          <Property Name="IdStudent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Age" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Studentnum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RegistrationModelStoreContainer" CdmEntityContainer="RegistrationEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="RegistrationModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admin_Acc">
+            <EntityTypeMapping TypeName="RegistrationModel.Admin_Acc">
+              <MappingFragment StoreEntitySet="Admin_Acc">
+                <ScalarProperty Name="Ad_id" ColumnName="Ad_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendars">
+            <EntityTypeMapping TypeName="RegistrationModel.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concerns">
+            <EntityTypeMapping TypeName="RegistrationModel.Concern">
+              <MappingFragment StoreEntitySet="Concerns">
+                <ScalarProperty Name="C_id" ColumnName="C_id" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Infractions">
+            <EntityTypeMapping TypeName="RegistrationModel.Infraction">
+              <MappingFragment StoreEntitySet="Infraction">
+                <ScalarProperty Name="Infr_Id" ColumnName="Infr_Id" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="Library" ColumnName="Library" />
+                <ScalarProperty Name="L_inf" ColumnName="L_inf" />
+                <ScalarProperty Name="Health" ColumnName="Health" />
+                <ScalarProperty Name="H_inf" ColumnName="H_inf" />
+                <ScalarProperty Name="Osas" ColumnName="Osas" />
+                <ScalarProperty Name="O_inf" ColumnName="O_inf" />
+                <ScalarProperty Name="Registrar" ColumnName="Registrar" />
+                <ScalarProperty Name="R_inf" ColumnName="R_inf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogActs">
+            <EntityTypeMapping TypeName="RegistrationModel.LogAct">
+              <MappingFragment StoreEntitySet="LogAct">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="RegistrationModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Contact_number" ColumnName="Contact_number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pass_Reset">
+            <EntityTypeMapping TypeName="RegistrationModel.Pass_Reset">
+              <MappingFragment StoreEntitySet="Pass_Reset">
+                <ScalarProperty Name="PR_id" ColumnName="PR_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="RegistrationModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
+                <ScalarProperty Name="GradeValue" ColumnName="GradeValue" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campus">
+            <EntityTypeMapping TypeName="RegistrationModel.Campu">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="Campus" ColumnName="Campus" />
+                <ScalarProperty Name="IdCampus" ColumnName="IdCampus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professors">
+            <EntityTypeMapping TypeName="RegistrationModel.Professor">
+              <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IdProf" ColumnName="IdProf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="RegistrationModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Section1" ColumnName="Section" />
+                <ScalarProperty Name="IdSection" ColumnName="IdSection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="RegistrationModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="IdProfessor" ColumnName="IdProfessor" />
+                <ScalarProperty Name="Subject1" ColumnName="Subject" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YearLevels">
+            <EntityTypeMapping TypeName="RegistrationModel.YearLevel">
+              <MappingFragment StoreEntitySet="YearLevel">
+                <ScalarProperty Name="YearLevel1" ColumnName="YearLevel" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentInfoes">
+            <EntityTypeMapping TypeName="RegistrationModel.StudentInfo">
+              <MappingFragment StoreEntitySet="StudentInfo">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_number" ColumnName="Contact_number" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="IdStudent" ColumnName="IdStudent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

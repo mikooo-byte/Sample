@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "LogInStudent";
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../../img/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 contents">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="mb-4">
+                            <h3>Student Login</h3>
+                            <p class="mb-4" id="msgEr" style="color:red"></p>
+                        </div>
+                        <form action="/Home/loginCheckerStudent" method="post" id="registrationFormStudent">
+                            <div class="form-group first">
+                                <label for="Studentnum">Student Number</label>
+                                <input type="text" class="form-control" id="Studentnum" name="Studentnum" required>
+
+                            </div>
+                            <div class="form-group last mb-4">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="Password" name="Password" required>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                                    <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a class="small" href="@Url.Action("Forgot","Home")">Forgot Password?</a>
+                                <a class="small" href="@Url.Action("LogIn","Home")">Login As Administrator</a>
+                            </div>
+                            <div class="col mt-4">
+                                <center> <button class="btn btn-lg btn-primary btn-block btn-signin" id="signIn" type="submit">Sign in</button></center>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/Login")
