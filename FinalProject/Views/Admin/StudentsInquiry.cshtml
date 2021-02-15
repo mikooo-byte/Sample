@@ -24,40 +24,64 @@
 </div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Inquiry Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <label class="font-weight-bold" for="Studentnum">Studentnum: </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span name="Studentnum" id="modalStudentnum"></span> <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <label class="font-weight-bold" for="Email">Email: </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span name="Email" id="modalEmail"></span><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <label class="font-weight-bold" for="Subject">Subject: </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span name="Subject" id="modalSubject"></span><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <label class="font-weight-bold" for="Content">Content : </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span name="Content" id="modalContent"></span> <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <label class="font-weight-bold" for="Status">Status: </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span name="Status" id="modalStatus"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="editData">Edit</button>
+                <button type="button" class="btn btn-danger" id="deleteData">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script type="text/javascript">
-    $(function () {
-        $.ajax({
-            type: "POST",
-            url: "/Admin/getInquiry",
-            data: '{}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: OnSuccess,
-            failure: function (response) {
-                alert(response.d);
-            },
-            error: function (response) {
-                alert(response.d);
-            }
-        });
-    });
-    function OnSuccess(response) {
-        $("#tblquestions").DataTable(
-            {
 
-
-                bLengthChange: true,
-                lengthMenu: [[5, 10, -1], [5, 10, "All"]],
-                bFilter: true,
-                bSort: true,
-                bPaginate: true,
-                data: response,
-
-                columns: [{ 'data': 'C_id', title: "C_id", visible: false },
-                { 'data': 'Studentnum', title: "Student Number" },
-                { 'data': 'Email', title: "Email" },
-                { 'data': 'Subject', title: "Subject" },
-                { 'data': 'Content', title: "Content" }]
-            });
-    };</script>
+<script src="../../Scripts/getInquiry.js"></script>

@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\ConcernDTO.cs" />
     <Compile Include="Models\DTO\GradeDTO.cs" />
     <Compile Include="Models\DTO\InfractionDTO.cs" />
     <Compile Include="Models\DTO\loginFormDTO.cs" />
@@ -201,6 +202,9 @@
     <Compile Include="Models\Entities\Subject.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\YearLevel.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -208,6 +212,7 @@
     <Compile Include="Models\Repository\Admin\EncryptDecryptRepository.cs" />
     <Compile Include="Models\Repository\Admin\GradeTable.cs" />
     <Compile Include="Models\Repository\Admin\InfractionRepository.cs" />
+    <Compile Include="Models\Repository\Admin\InquiryRepository.cs" />
     <Compile Include="Models\Repository\Admin\Registration.cs" />
     <Compile Include="Models\Repository\Student\GetGradesRepository.cs" />
     <Compile Include="Models\Repository\Student\GetStudentInfo.cs" />
@@ -278,6 +283,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\getInquiry.js" />
     <Content Include="Scripts\GradesSlip.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />

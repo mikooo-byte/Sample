@@ -56,6 +56,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Subject" Type="nvarchar(max)" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -69,11 +70,13 @@
           <Property Name="Section" Type="nvarchar" MaxLength="20" />
           <Property Name="SchoolYear" Type="nvarchar" MaxLength="50" />
           <Property Name="Semester" Type="nvarchar" MaxLength="50" />
-          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
           <Property Name="Unit" Type="int" />
           <Property Name="GradeValue" Type="float" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdProf" Type="int" />
+          <Property Name="ProfName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Infraction">
           <Key>
@@ -131,6 +134,7 @@
           <Property Name="IdProf" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompleteName" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -162,16 +166,62 @@
           </Key>
           <Property Name="SubjectCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit" Type="int" />
           <Property Name="IdProfessor" Type="int" />
-          <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="YearLevel">
           <Key>
             <PropertyRef Name="YearId" />
           </Key>
-          <Property Name="YearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearId" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="YearLevel" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK_Grade_Professor">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="IdProf" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="IdProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Professor">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="IdProf" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="IdProfessor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RegistrationModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin_Acc" EntityType="Self.Admin_Acc" Schema="dbo" store:Type="Tables" />
@@ -187,7 +237,20 @@
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YearLevel" EntityType="Self.YearLevel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Grade_Professor" Association="Self.FK_Grade_Professor">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Subject" Association="Self.FK_Grade_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Professor" Association="Self.FK_Subject_Professor">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -237,6 +300,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Infraction">
           <Key>
@@ -301,8 +365,21 @@
           <EntitySet Name="Professors" EntityType="RegistrationModel.Professor" />
           <EntitySet Name="Sections" EntityType="RegistrationModel.Section" />
           <EntitySet Name="Subjects" EntityType="RegistrationModel.Subject" />
-          <EntitySet Name="YearLevels" EntityType="RegistrationModel.YearLevel" />
           <EntitySet Name="StudentInfoes" EntityType="RegistrationModel.StudentInfo" />
+          <EntitySet Name="sysdiagrams" EntityType="RegistrationModel.sysdiagram" />
+          <AssociationSet Name="FK_Grade_Grade" Association="RegistrationModel.FK_Grade_Grade">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_Professor" Association="RegistrationModel.FK_Subject_Professor">
+            <End Role="Professor" EntitySet="Professors" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <EntitySet Name="YearLevels" EntityType="RegistrationModel.YearLevel" />
+          <AssociationSet Name="FK_Grade_Professor" Association="RegistrationModel.FK_Grade_Professor">
+            <End Role="Professor" EntitySet="Professors" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grade">
           <Key>
@@ -314,13 +391,17 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="Int32" />
           <Property Name="GradeValue" Type="Double" />
           <Property Name="SchoolYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Semester" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subject1" Relationship="RegistrationModel.FK_Grade_Grade" FromRole="Grade" ToRole="Subject" />
+          <Property Name="IdProf" Type="Int32" />
+          <Property Name="ProfName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Professor" Relationship="RegistrationModel.FK_Grade_Professor" FromRole="Grade" ToRole="Professor" />
         </EntityType>
         <EntityType Name="Campu">
           <Key>
@@ -336,6 +417,9 @@
           <Property Name="IdProf" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subjects" Relationship="RegistrationModel.FK_Subject_Professor" FromRole="Professor" ToRole="Subject" />
+          <Property Name="CompleteName" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Grades" Relationship="RegistrationModel.FK_Grade_Professor" FromRole="Professor" ToRole="Grade" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -351,14 +435,9 @@
           <Property Name="SubjectCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Subject1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdProfessor" Type="Int32" />
-          <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="YearLevel">
-          <Key>
-            <PropertyRef Name="YearId" />
-          </Key>
-          <Property Name="YearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="YearLevel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Grades" Relationship="RegistrationModel.FK_Grade_Grade" FromRole="Subject" ToRole="Grade" />
+          <NavigationProperty Name="Professor1" Relationship="RegistrationModel.FK_Subject_Professor" FromRole="Subject" ToRole="Professor" />
+          <Property Name="Unit" Type="Int32" />
         </EntityType>
         <EntityType Name="StudentInfo">
           <Key>
@@ -377,6 +456,59 @@
           <Property Name="Studentnum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Grade_Grade">
+          <End Type="RegistrationModel.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="RegistrationModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subject_Professor">
+          <End Type="RegistrationModel.Professor" Role="Professor" Multiplicity="0..1" />
+          <End Type="RegistrationModel.Subject" Role="Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="IdProf" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="IdProfessor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="YearLevel">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="YearLevel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Grade_Professor">
+          <End Type="RegistrationModel.Professor" Role="Professor" Multiplicity="0..1" />
+          <End Type="RegistrationModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="IdProf" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="IdProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -424,6 +556,7 @@
           <EntitySetMapping Name="Concerns">
             <EntityTypeMapping TypeName="RegistrationModel.Concern">
               <MappingFragment StoreEntitySet="Concerns">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="C_id" ColumnName="C_id" />
                 <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -488,6 +621,8 @@
           <EntitySetMapping Name="Grades">
             <EntityTypeMapping TypeName="RegistrationModel.Grade">
               <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="ProfName" ColumnName="ProfName" />
+                <ScalarProperty Name="IdProf" ColumnName="IdProf" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
@@ -515,6 +650,7 @@
           <EntitySetMapping Name="Professors">
             <EntityTypeMapping TypeName="RegistrationModel.Professor">
               <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="CompleteName" ColumnName="CompleteName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="IdProf" ColumnName="IdProf" />
@@ -532,18 +668,10 @@
           <EntitySetMapping Name="Subjects">
             <EntityTypeMapping TypeName="RegistrationModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="IdProfessor" ColumnName="IdProfessor" />
                 <ScalarProperty Name="Subject1" ColumnName="Subject" />
                 <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="YearLevels">
-            <EntityTypeMapping TypeName="RegistrationModel.YearLevel">
-              <MappingFragment StoreEntitySet="YearLevel">
-                <ScalarProperty Name="YearLevel1" ColumnName="YearLevel" />
-                <ScalarProperty Name="YearId" ColumnName="YearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -562,6 +690,25 @@
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
                 <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="IdStudent" ColumnName="IdStudent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RegistrationModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YearLevels">
+            <EntityTypeMapping TypeName="RegistrationModel.YearLevel">
+              <MappingFragment StoreEntitySet="YearLevel">
+                <ScalarProperty Name="YearLevel1" ColumnName="YearLevel" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

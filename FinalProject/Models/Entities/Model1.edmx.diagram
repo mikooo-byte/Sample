@@ -14,12 +14,16 @@
         <EntityTypeShape EntityType="RegistrationModel.Member" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RegistrationModel.Pass_Reset" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RegistrationModel.Grade" Width="1.5" PointX="5" PointY="7.75" />
-        <EntityTypeShape EntityType="RegistrationModel.Campu" Width="1.5" PointX="7.25" PointY="7.75" />
+        <EntityTypeShape EntityType="RegistrationModel.Campu" Width="2.125" PointX="12.625" PointY="7.875" />
         <EntityTypeShape EntityType="RegistrationModel.Professor" Width="1.5" PointX="9.125" PointY="9.625" />
         <EntityTypeShape EntityType="RegistrationModel.Section" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="RegistrationModel.Subject" Width="1.5" PointX="7.25" PointY="9.5" />
-        <EntityTypeShape EntityType="RegistrationModel.YearLevel" Width="1.5" PointX="9" PointY="7.75" />
         <EntityTypeShape EntityType="RegistrationModel.StudentInfo" Width="1.5" PointX="2.875" PointY="7.75" />
+        <EntityTypeShape EntityType="RegistrationModel.sysdiagram" Width="1.5" PointX="9.375" PointY="0.75" />
+        <AssociationConnector Association="RegistrationModel.FK_Grade_Grade" />
+        <AssociationConnector Association="RegistrationModel.FK_Subject_Professor" />
+        <EntityTypeShape EntityType="RegistrationModel.YearLevel" Width="1.5" PointX="9.375" PointY="6.75" />
+        <AssociationConnector Association="RegistrationModel.FK_Grade_Professor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

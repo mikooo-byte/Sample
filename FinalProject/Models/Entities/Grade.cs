@@ -27,5 +27,10 @@ namespace FinalProject.Models.Entities
         public string SchoolYear { get; set; }
         public string Semester { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> IdProf { get; set; }
+        public string ProfName { get; set; }
+    
+        public virtual Subject Subject1 { get; set; }
+        public virtual Professor Professor { get; set; }
     }
 }

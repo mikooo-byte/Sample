@@ -14,8 +14,21 @@ namespace FinalProject.Models.Entities
     
     public partial class Professor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Professor()
+        {
+            this.Subjects = new HashSet<Subject>();
+            this.Grades = new HashSet<Grade>();
+        }
+    
         public int IdProf { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public string CompleteName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subject> Subjects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grade> Grades { get; set; }
     }
 }

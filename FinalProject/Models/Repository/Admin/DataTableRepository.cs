@@ -15,37 +15,37 @@ namespace FinalProject.Models.Repository
         {
 
             List<RecordDTO> records = new List<RecordDTO>();
-            List<Member> members = new List<Member>();
+            List<StudentInfo> members = new List<StudentInfo>();
 
 
             if (!string.IsNullOrEmpty(category))
             {
                 if (category == "First Name")
                 {
-                    members = db.Members.Where(a => a.Firstname.Contains(keyword)).ToList();
+                    members = db.StudentInfoes.Where(a => a.Firstname.Contains(keyword)).ToList();
                 }
                 else if (category == "Last Name")
                 {
-                    members = db.Members.Where(a => a.Lastname.Contains(keyword)).ToList();
+                    members = db.StudentInfoes.Where(a => a.Lastname.Contains(keyword)).ToList();
                 }
                 else if (category == "Email")
                 {
-                    members = db.Members.Where(a => a.Email.Contains(keyword)).ToList();
+                    members = db.StudentInfoes.Where(a => a.Email.Contains(keyword)).ToList();
                 }
 
             }
             else
             {
-                members = db.Members.ToList();
+                members = db.StudentInfoes.ToList();
             }
 
 
             //looping of details
-            foreach (Member mem in members)
+            foreach (StudentInfo mem in members)
             {
                 RecordDTO r = new RecordDTO();
 
-                r.StudentId = mem.StudentId;
+                r.StudentId = mem.IdStudent;
                 r.Firstname = mem.Firstname;
                 r.Lastname = mem.Lastname;
                 r.Middlename = mem.Middlename;
@@ -70,7 +70,7 @@ namespace FinalProject.Models.Repository
         public bool updateRecord(RecordDTO record)
         {
 
-            var checkIfExisting = db.Members.Where(r => r.StudentId == record.StudentId).FirstOrDefault();
+            var checkIfExisting = db.StudentInfoes.Where(r => r.IdStudent == record.StudentId).FirstOrDefault();
             if (checkIfExisting != null)
             {
                 checkIfExisting.Firstname = record.Firstname;

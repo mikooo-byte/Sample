@@ -38,7 +38,8 @@ namespace FinalProject.Models.Entities
         public virtual DbSet<Professor> Professors { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<YearLevel> YearLevels { get; set; }
         public virtual DbSet<StudentInfo> StudentInfoes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<YearLevel> YearLevels { get; set; }
     }
 }

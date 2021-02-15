@@ -79,7 +79,7 @@ namespace FinalProject.Controllers
         {
 
             var success = false;
-            var account = db.Members.Where(ad => ad.Studentnum == dto.Studentnum).FirstOrDefault();
+            var account = db.Admin_Acc.Where(ad => ad.Username == dto.Studentnum).FirstOrDefault();
 
             if (account != null)
             {

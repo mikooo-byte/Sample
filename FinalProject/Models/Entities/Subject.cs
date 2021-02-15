@@ -14,9 +14,19 @@ namespace FinalProject.Models.Entities
     
     public partial class Subject
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Subject()
+        {
+            this.Grades = new HashSet<Grade>();
+        }
+    
         public string SubjectCode { get; set; }
         public string Subject1 { get; set; }
         public Nullable<int> IdProfessor { get; set; }
-        public string Professor { get; set; }
+        public Nullable<int> Unit { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grade> Grades { get; set; }
+        public virtual Professor Professor1 { get; set; }
     }
 }

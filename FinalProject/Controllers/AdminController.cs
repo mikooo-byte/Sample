@@ -267,10 +267,9 @@ namespace FinalProject.Controllers
         }
         public JsonResult getInquiry()
         {
-            RegistrationEntities entities = new RegistrationEntities();
-            List<Concern> concern = (from account in entities.Concerns
-                                     select account).ToList();
-            return Json(concern);
+            InquiryRepository inquiryRepo = new InquiryRepository();
+            List<ConcernDTO> records = inquiryRepo.ConcernRecords();
+            return Json(new { data = records });
         }
 
 

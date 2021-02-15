@@ -14,7 +14,7 @@ namespace FinalProject.Models.Entities
     
     public partial class YearLevel
     {
-        public int YearId { get; set; }
+        public string YearId { get; set; }
         public string YearLevel1 { get; set; }
     }
 }

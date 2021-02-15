@@ -48,8 +48,9 @@
                             $("#msgEr").text("Account Locked! Ask Assistance to Admin");
                         }
                         else {
-                            swal("Error!", "Username or Password is Incorrect", "error");
                             $("#password").val("");
+                            swal("Error!", "Username or Password is Incorrect", "error");
+                            
                             
                         }
                     }
@@ -104,8 +105,9 @@
                             $("#msgErStud").text("Account Locked! Ask Assistance to Admin");
                         }
                         else {
-                            swal("Error!", "Username or Password is Incorrect", "error");
                             $("#Password").val("");
+                            swal("Error!", "Username or Password is Incorrect", "error");
+                            
                         }
                     }
                 },
