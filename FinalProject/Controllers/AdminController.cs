@@ -10,6 +10,8 @@ using FinalProject.Models.DTO;
 using FinalProject.Models.Entities;
 using FinalProject.Models.Repository.Admin;
 using System.Web.Security;
+using System.Net.Mail;
+using System.Net;
 
 namespace FinalProject.Controllers
 {
@@ -272,6 +274,89 @@ namespace FinalProject.Controllers
             return Json(new { data = records });
         }
 
+        [HttpPost]
+        public ActionResult StudentsInquiry(SendMailDto sendMailDto)
 
+        {
+            if (!ModelState.IsValid) return View();
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                // you need to enter your mail address
+                mail.From = new MailAddress("qcuph2021@gmail.com");
+
+
+                //To Email Address - your need to enter your to email address
+                mail.To.Add(sendMailDto.Receiver);
+
+                mail.Subject = sendMailDto.Subject;
+
+                //you can specify also CC and BCC - i will skip this
+                //mail.CC.Add("");
+                //mail.Bcc.Add("");
+
+                mail.IsBodyHtml = true;
+
+                string content = "Name : " + sendMailDto.Name;
+                content += "<br/> Message : " + sendMailDto.Message;
+
+                mail.Body = content;
+
+
+                //create SMTP instant
+
+                //you need to pass mail server address and you can also specify the port number if you required
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+
+                //Create nerwork credential and you need to give from email address and password
+                NetworkCredential networkCredential = new NetworkCredential("qcuph2021@gmail.com", "Password@12345");
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = networkCredential;
+                smtpClient.Port = 587; // this is default port number - you can also change this
+                smtpClient.EnableSsl = true; // if ssl required you need to enable it
+                smtpClient.Send(mail);
+
+                ViewBag.Message = "Mail Send";
+
+                // now i need to create the from 
+                ModelState.Clear();
+
+                //update status
+                /*var status = "Closed";
+                var checkIfExisting = db.Concerns.Where(r => r.Email == sendMailDto.Receiver).FirstOrDefault();
+                if (checkIfExisting != null)
+                {
+                    checkIfExisting.Status = status;
+
+                    db.SaveChanges();
+                }*/
+
+
+            }
+            catch (Exception ex)
+            {
+                //If any error occured it will show
+                ViewBag.Message = ex.Message.ToString();
+            }
+            return View();
+        }
+
+        public ActionResult UpdStatus(ConcernDTO dto)
+        {
+            //Update the event
+
+            var checkIfExisting = db.Concerns.Where(r => r.Studentnum == dto.Studentnum).FirstOrDefault();
+
+            if (checkIfExisting != null)
+            {
+                checkIfExisting.Status = dto.Status;
+
+                db.SaveChanges();
+
+            }
+
+            return View("StudentsInquiry");
+        }
     }
 }

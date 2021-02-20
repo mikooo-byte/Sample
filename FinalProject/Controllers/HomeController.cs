@@ -44,35 +44,26 @@ namespace FinalProject.Controllers
         }
         public ActionResult LogInStudent()
         {
-            //if (ModelState.IsValid)string username, string password
-            //{
-            //    var data = db.Members.Where(s => s.Studentnum.Equals(username) && s.Password.Equals(password)).ToList();
-            //    if (data.Count() > 0)
-            //    {
-            //        return RedirectToAction("Index", "Student");
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction("LogInStudent");
-            //    }
-            //}
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (Session["Username"] != null)
+                {
+                    return RedirectToAction("Index", "Student");
+                }
+            }
+             return View();
         }
         public ActionResult LoginAdmin()
         {
-            //if (ModelState.IsValid)string username, string password
-            //{
-            //    var data = db.Admin_Acc.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).ToList();
-            //    if (data.Count() > 0)
-            //    {
-            //        return RedirectToAction("Index", "Admin");
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction("AdminLogin");
-            //    }
-            //}
+            if (ModelState.IsValid) 
+            {
+                if (Session["Username"] != null)
+                {
+                    return RedirectToAction("Index", "Admin");
+                }                
+            }
             return View();
+            
         }
 
         public bool loginChecker(LoginFormDTO dto)
@@ -105,6 +96,7 @@ namespace FinalProject.Controllers
                 if (decryptedPass == account.Password)
                 {
                     Session["UserName"] = dto.Studentnum.ToString();
+                    Session["Email"] = account.Email.ToString();
                     return true;
                 }
             }

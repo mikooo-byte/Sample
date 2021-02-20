@@ -48,7 +48,7 @@
                             $("#msgEr").text("Account Locked! Ask Assistance to Admin");
                         }
                         else {
-                            $("#password").val("");
+                            $("#Password").val("");
                             swal("Error!", "Username or Password is Incorrect", "error");
                             
                             
@@ -61,6 +61,7 @@
             });
         }
     });
+
     $("#registrationFormStudent").validate({
         rules: {
             Studentnum: {

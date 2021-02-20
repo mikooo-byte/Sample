@@ -34,6 +34,193 @@
 
         $("#exampleModal").modal("show");
     });
+
+    $("#reply").click(function () {
+
+
+        $("#Emailmodal").val(Email);
+
+        $("#replyModal").modal("show");
+
+    });
+
+    $("#editData").click(function () {
+
+
+        $("#Studentnummodal").val(Studentnum);
+
+        $("#statusModal").modal("show");
+
+    });
+
+
+    $("#Replyform").validate({
+        rules: {
+            Name: {
+                required: true,
+            },
+            Receiver: {
+                required: true,
+            },
+            Subject: {
+                required: true,
+            },
+            Message: {
+                required: true,
+            },
+        },
+        messages: {
+            Name: {
+                required: "*This field is required",
+            },
+            Receiver: {
+                required: "*This field is required",
+            },
+            Subject: {
+                required: "*Please provide a Subject to your email",
+            },
+            Message: {
+                required: "*Please type your message",
+            },
+        },
+        submitHandler: function (form) {
+            var url = $(form).attr("action");
+            var data = $(form).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.success) {
+                        swal("Error!", "Some problem occured", "error");
+
+                    }
+                    else {
+
+                        $("#replyModal").modal("hide");
+                        swal("Sent!!", "Your message has been sent.", "success");
+                        LoadDataTables();
+                    }
+                },
+                error: function (res) {
+
+                }
+            });
+
+        }
+    });
+
+    $("#Question").validate({
+        rules: {
+            Studentnum: {
+                required: true,
+            },
+            Email: {
+                required: true,
+            },
+            Subject: {
+                required: true,
+            },
+            Content: {
+                required: true,
+            },
+            Status: {
+                required: true,
+            },
+        },
+        messages: {
+            Studentnum: {
+                required: "*This field is required",
+            },
+            Email: {
+                required: "*This field is required",
+            },
+            Subject: {
+                required: "*Please provide a Subject to your email",
+            },
+            Content: {
+                required: "*Please type your message",
+            },
+            Status: {
+                required: "*This field is required",
+            },
+        },
+        submitHandler: function (form) {
+            var url = $(form).attr("action");
+            var data = $(form).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.success) {
+                        swal("Error!", "Some problem occured", "error");
+
+                    }
+                    else {
+
+                        $("#myModalQuestion").modal("hide");
+                        swal("Sent!!", "Your message has been sent.", "success");
+                        LoadDataTables();
+                    }
+                },
+                error: function (res) {
+
+                }
+            });
+
+        }
+    });
+
+    $("#Statusform").validate({
+        rules: {
+            Studentnum: {
+                required: true,
+            },
+            Status: {
+                required: true,
+            },
+
+        },
+        messages: {
+            Studentnum: {
+                required: "*This field is required",
+            },
+            Status: {
+                required: "*This field is required",
+            },
+
+        },
+        submitHandler: function (form) {
+            var url = $(form).attr("action");
+            var data = $(form).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (res) {
+                    if (res.success) {
+                        swal("Error!", "Some problem occured", "error");
+
+                    }
+                    else {
+
+                        $("#statusModal").modal("hide");
+                        swal("Save!!", "The status has been saved.", "success");
+                        LoadDataTables();
+                    }
+                },
+                error: function (res) {
+
+                }
+            });
+
+        }
+    });
+
 });
 
 function LoadDataTables() {

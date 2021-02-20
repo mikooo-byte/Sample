@@ -10,11 +10,14 @@ using FinalProject.Models.Entities;
 using FinalProject.Models.Repository.Student;
 using FinalProject.Reports.StudentLists;
 using System.Web.Security;
+using System.Net;
+using System.Net.Mail;
 
 namespace FinalProject.Controllers
 {
     public class StudentController : Controller
     {
+        readonly RegistrationEntities db = new RegistrationEntities();
         // GET: Student
         public ActionResult Index()
         {
@@ -52,6 +55,17 @@ namespace FinalProject.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        public ActionResult TeachersEvalSuccess()
+        {
+            if (Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
         public ActionResult Grade()
         {
             if (Session["Username"] != null)
@@ -62,7 +76,6 @@ namespace FinalProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            //return View();
         }
         [HttpPost]
         public ActionResult GetGrades(string IdCode)
@@ -115,7 +128,9 @@ namespace FinalProject.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
+
+
         public ActionResult NewsUpdate()
         {
             if (Session["Username"] != null)
@@ -219,7 +234,7 @@ namespace FinalProject.Controllers
 
             StudentPersonalGrade rpt = new StudentPersonalGrade();
             Report rptMngmt = new Report(rpt);
-            rpt.SetParameterValue("@StudentnumId","18-44490"); // Session["Username"]
+            rpt.SetParameterValue("@StudentnumId", Session["Username"]); 
 
             rpt = (StudentPersonalGrade)rptMngmt.CrystalReportConnection();
             var result = rptMngmt.ConvertCrystalToFormat("PDF");
@@ -228,6 +243,23 @@ namespace FinalProject.Controllers
 
         }
 
+        public ActionResult getConcern(ConcernDTO data)
+        {
+
+            Concern con = new Concern();
+
+            con.Studentnum = data.Studentnum;
+            con.Email = data.Email;
+            con.Subject = data.Subject;
+            con.Content = data.Content;
+            con.Status = data.Status;
+
+
+            db.Concerns.Add(con);
+            db.SaveChanges();
+            return View("FAQ");
+                
+        }
 
     }
 }
