@@ -41,5 +41,6 @@ namespace FinalProject.Models.Entities
         public virtual DbSet<StudentInfo> StudentInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<YearLevel> YearLevels { get; set; }
+        public virtual DbSet<ResetCode> ResetCodes { get; set; }
     }
 }

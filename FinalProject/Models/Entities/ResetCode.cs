@@ -12,12 +12,12 @@ namespace FinalProject.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Pass_Reset
+    public partial class ResetCode
     {
-        public int PR_id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
+        public int RC_id { get; set; }
+        public string Studentnum { get; set; }
         public string Code { get; set; }
+        public string Username { get; set; }
         public string Status { get; set; }
     }
 }

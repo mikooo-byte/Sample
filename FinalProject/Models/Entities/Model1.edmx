@@ -126,6 +126,8 @@
           <Property Name="PR_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Professor">
           <Key>
@@ -135,6 +137,16 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="CompleteName" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResetCode">
+          <Key>
+            <PropertyRef Name="RC_id" />
+          </Key>
+          <Property Name="RC_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentnum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -234,6 +246,7 @@
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pass_Reset" EntityType="Self.Pass_Reset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResetCode" EntityType="Self.ResetCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
@@ -350,6 +363,8 @@
           <Property Name="PR_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="RegistrationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
@@ -380,6 +395,7 @@
             <End Role="Professor" EntitySet="Professors" />
             <End Role="Grade" EntitySet="Grades" />
           </AssociationSet>
+          <EntitySet Name="ResetCodes" EntityType="RegistrationModel.ResetCode" />
         </EntityContainer>
         <EntityType Name="Grade">
           <Key>
@@ -509,6 +525,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ResetCode">
+          <Key>
+            <PropertyRef Name="RC_id" />
+          </Key>
+          <Property Name="RC_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentnum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -612,6 +638,8 @@
           <EntitySetMapping Name="Pass_Reset">
             <EntityTypeMapping TypeName="RegistrationModel.Pass_Reset">
               <MappingFragment StoreEntitySet="Pass_Reset">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PR_id" ColumnName="PR_id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -709,6 +737,17 @@
               <MappingFragment StoreEntitySet="YearLevel">
                 <ScalarProperty Name="YearLevel1" ColumnName="YearLevel" />
                 <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResetCodes">
+            <EntityTypeMapping TypeName="RegistrationModel.ResetCode">
+              <MappingFragment StoreEntitySet="ResetCode">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Studentnum" ColumnName="Studentnum" />
+                <ScalarProperty Name="RC_id" ColumnName="RC_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

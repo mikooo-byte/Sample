@@ -19,6 +19,10 @@ namespace FinalProject.Controllers
             return View();
         }
 
+        public ActionResult PasswordReset()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -97,11 +101,83 @@ namespace FinalProject.Controllers
                 {
                     Session["UserName"] = dto.Studentnum.ToString();
                     Session["Email"] = account.Email.ToString();
+                    Session["Name"] = account.Lastname.ToString() + ", " + account.Firstname.ToString();
+                    Session["Lastname"] = account.Lastname.ToString();
+                    Session["Firstname"] = account.Firstname.ToString();
+                    Session["Middlename"] = account.Middlename.ToString();
+                    Session["DOB"] = account.DOB.ToString();
+                    Session["Sex"] = account.Sex.ToString();
+                    Session["Address"] = account.Address.ToString();
                     return true;
                 }
             }
             return success;
         }
 
+        public bool CheckCode(PassResetDTO dto)
+        {
+
+            var success = false;
+            var account = db.Pass_Reset.Where(ad => ad.Username == dto.Username && ad.Status == "Pending").FirstOrDefault();
+
+            if (account != null)
+            {
+
+                if (account.Code == dto.Code)
+                {
+                    Session["UserName"] = dto.Username.ToString();
+                    return true;
+                }
+
+            }
+            return success;
+
+        }
+
+        public ActionResult UpdPassword(RegistrationFormDTO dto)
+        {
+
+
+            var checkIfExisting = db.StudentInfoes.Where(r => r.Studentnum == dto.Studentnum).FirstOrDefault();
+
+            if (checkIfExisting != null)
+            {
+                checkIfExisting.Password = EDrep.Encrypt(dto.Studentnum, dto.Password);
+
+                db.SaveChanges();
+
+            }
+
+            return View("LogInStudent");
+        }
+
+        public bool CheckStudentnum(LoginFormDTO dto, PassResetDTO pass)
+        {
+
+            var success = false;
+            var account = db.StudentInfoes.Where(ad => ad.Studentnum == dto.Studentnum).FirstOrDefault();
+
+            if (account != null)
+            {
+
+                var snum = Session["UserName"] = dto.Studentnum.ToString();
+                var em = Session["Email"] = account.Email.ToString();
+
+                Pass_Reset info = new Pass_Reset();
+
+                info.Username = (string)snum;
+                info.Email = (string)em;
+                info.Code = pass.Code;
+                info.Status = "Pending";
+
+                db.Pass_Reset.Add(info);
+                db.SaveChanges();
+                return true;
+
+            }
+            return success;
+
+
+        }
     }
 }

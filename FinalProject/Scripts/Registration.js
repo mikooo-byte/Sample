@@ -122,6 +122,7 @@ $(document).ready(function () {
                         
                         $("#ajaxLoader").hide();
                         swal("Nice!", "Successfully Added", "success");
+                        window.location.href = "../Admin/StudentInfo";
                         //window.location.href = "../Home/StudentLogin";
                     }
                     else {

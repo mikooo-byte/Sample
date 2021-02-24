@@ -442,6 +442,7 @@ mark,
 .list-unstyled {
     padding-left: 0;
     list-style: none;
+    color: floralwhite;
 }
 
 .list-inline {
@@ -12190,3 +12191,15 @@ body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
 
+.footer {
+    padding: 1rem 0;
+    background: #343a40;
+    font-size: 14px;
+    color: #fff;
+}
+    .footer a {
+        color: #cccccc;
+    }
+/*list-unstyled {
+    color: #969696;
+}*/

@@ -24,6 +24,7 @@
         <AssociationConnector Association="RegistrationModel.FK_Subject_Professor" />
         <EntityTypeShape EntityType="RegistrationModel.YearLevel" Width="1.5" PointX="9.375" PointY="6.75" />
         <AssociationConnector Association="RegistrationModel.FK_Grade_Professor" />
+        <EntityTypeShape EntityType="RegistrationModel.ResetCode" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

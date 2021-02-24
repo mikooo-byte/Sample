@@ -45,7 +45,7 @@ namespace FinalProject
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
                       "~/Scripts/dataTableModule.js"));
 
-            
+
         }
     }
 }

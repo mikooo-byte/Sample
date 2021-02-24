@@ -143,8 +143,10 @@
     <Compile Include="Models\DTO\InfractionDTO.cs" />
     <Compile Include="Models\DTO\loginFormDTO.cs" />
     <Compile Include="Models\DTO\Navbar.cs" />
+    <Compile Include="Models\DTO\PassResetDTO.cs" />
     <Compile Include="Models\DTO\RecordDTO.cs" />
     <Compile Include="Models\DTO\RegistrationFormDTO.cs" />
+    <Compile Include="Models\DTO\ResetCodeDTO.cs" />
     <Compile Include="Models\DTO\SendMailDto.cs" />
     <Compile Include="Models\Entities\Account.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -194,6 +196,9 @@
     <Compile Include="Models\Entities\Professor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\ResetCode.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Section.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -214,6 +219,7 @@
     <Compile Include="Models\Repository\Admin\GradeTable.cs" />
     <Compile Include="Models\Repository\Admin\InfractionRepository.cs" />
     <Compile Include="Models\Repository\Admin\InquiryRepository.cs" />
+    <Compile Include="Models\Repository\Admin\PassResetRepo.cs" />
     <Compile Include="Models\Repository\Admin\Registration.cs" />
     <Compile Include="Models\Repository\Student\GetGradesRepository.cs" />
     <Compile Include="Models\Repository\Student\GetStudentInfo.cs" />
@@ -307,6 +313,7 @@
     <Content Include="images\beyond.jpg" />
     <Content Include="images\bg_1.jpg" />
     <Content Include="images\business.png" />
+    <Content Include="images\C.png" />
     <Content Include="images\calye.png" />
     <Content Include="images\course_1.jpg" />
     <Content Include="images\course_2.jpg" />
@@ -318,11 +325,20 @@
     <Content Include="images\entrep.jpg" />
     <Content Include="images\haraya.png" />
     <Content Include="images\hewo.jpg" />
+    <Content Include="images\I.jpg" />
     <Content Include="images\industrial.jpg" />
+    <Content Include="images\JOY.jpg" />
     <Content Include="images\logo1.png" />
+    <Content Include="images\ML.jpg" />
     <Content Include="images\news.jpg" />
+    <Content Include="images\QCYDO.png" />
+    <Content Include="images\ReOpening.jpg" />
+    <Content Include="images\StudentAffair.jpg" />
     <Content Include="images\t.jpg" />
     <Content Include="images\tatak.jpg" />
+    <Content Include="images\X.jpg" />
+    <Content Include="images\Y.jpg" />
+    <Content Include="images\Z.PNG" />
     <Content Include="img\loading.gif" />
     <Content Include="img\QCU.png" />
     <Content Include="img\QCU2.png" />
@@ -531,10 +547,12 @@
     <Content Include="Views\Home\_ajaxLoader.cshtml" />
     <Content Include="Views\Admin\_ajaxLoader.cshtml" />
     <Content Include="Views\Student\_ajaxLoader.cshtml" />
-    <Content Include="Views\Student\TeachersEvalSuccess.cshtml" />
+    <Content Include="Views\Admin\PasswordReset.cshtml" />
+    <Content Include="Views\Home\PasswordReset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\NavbarControllerTest\" />
   </ItemGroup>
   <ItemGroup>
