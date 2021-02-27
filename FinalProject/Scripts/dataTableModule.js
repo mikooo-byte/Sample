@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     LoadDataTables("", "");
+    LoadSchedTables();
     var studid, lastname, fname, mname, contact, email, add, dob,bday, age, sex;
     var table = $('#example').DataTable();
 
@@ -264,4 +265,33 @@ function numberCheck(input) {
     var regex = /[^0-9]/gi;
     input.value = input.value.replace(regex, "");
 
+}
+
+
+function LoadSchedTables() {
+    $('#tblschedule').DataTable({
+        paging: true,
+        info: true,
+        searching: false,
+        paging: true,
+        info: true,
+        destroy: true,
+        lengthMenu: [[10, 20, 30, -1], [10, 20, "All"]],
+        ajax: {
+            url: "../Student/getSchedule",
+            type: "POST",
+            data: function (d) {
+
+            }
+        },
+        columns: [{ 'data': 'S_id', title: "S_id", visible: false },
+        { 'data': 'Code', title: "Code" },
+        { 'data': 'Subject', title: "Subject" },
+        { 'data': 'Unit', title: "Unit" },
+        { 'data': 'Room', title: "Room" },
+        { 'data': 'Day', title: "Day" },
+        { 'data': 'Time', title: "Time" },
+        { 'data': 'Professor', title: "Professor" }]
+
+    });
 }

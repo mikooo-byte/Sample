@@ -31,6 +31,18 @@ namespace FinalProject.Controllers
             }
         }
 
+        public ActionResult StudentsProfile()
+        {
+            if (Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         public ActionResult TeachersEvaluation()
         {
 
@@ -133,27 +145,27 @@ namespace FinalProject.Controllers
 
         public ActionResult NewsUpdate()
         {
-            //if (Session["Username"] != null)
-            //{
-            //    return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            return View();
+            if (Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //return View();
         }
         public ActionResult Announcements()
         {
-            //if (Session["Username"] != null)
-            //{
-            //    return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            return View();
+            if (Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //return View();
         }
         public ActionResult UniversityCalendar()
         {
@@ -261,6 +273,12 @@ namespace FinalProject.Controllers
             db.SaveChanges();
             return View("FAQ");
                 
+        }
+        public JsonResult getSchedule()
+        {
+            ScheduleRepo scheduleRepo = new ScheduleRepo();
+            List<ScheduleDTO> records = scheduleRepo.RequestSchedule();
+            return Json(new { data = records });
         }
 
     }

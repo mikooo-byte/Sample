@@ -147,6 +147,7 @@
     <Compile Include="Models\DTO\RecordDTO.cs" />
     <Compile Include="Models\DTO\RegistrationFormDTO.cs" />
     <Compile Include="Models\DTO\ResetCodeDTO.cs" />
+    <Compile Include="Models\DTO\ScheduleDTO.cs" />
     <Compile Include="Models\DTO\SendMailDto.cs" />
     <Compile Include="Models\Entities\Account.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -199,10 +200,28 @@
     <Compile Include="Models\Entities\ResetCode.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Schedule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Section.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\StudentGrade_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\StudentInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\StudentList_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\StudentPersonalGrade_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities\Subject.cs">
@@ -223,11 +242,18 @@
     <Compile Include="Models\Repository\Admin\Registration.cs" />
     <Compile Include="Models\Repository\Student\GetGradesRepository.cs" />
     <Compile Include="Models\Repository\Student\GetStudentInfo.cs" />
+    <Compile Include="Models\Repository\Student\ScheduleRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ContentTypeFactory.cs" />
     <Compile Include="Reports\ODBCConfiguration.cs" />
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\ReportFormatFactory.cs" />
+    <Compile Include="Reports\StudentLists\RegistrarStudentSched.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistrarStudentSched.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\StudentLists\StudentList.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -375,13 +401,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <EntityDeploy Include="Models\Entities\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Entities\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -406,6 +425,14 @@
     <Content Include="Content\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="Content\fonts\icomoon\selection.json" />
     <Content Include="images\.DS_Store" />
+    <EntityDeploy Include="Models\Entities\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entities\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\StudentPortal.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -549,10 +576,10 @@
     <Content Include="Views\Student\_ajaxLoader.cshtml" />
     <Content Include="Views\Admin\PasswordReset.cshtml" />
     <Content Include="Views\Home\PasswordReset.cshtml" />
+    <Content Include="Views\Student\StudentsProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\NavbarControllerTest\" />
   </ItemGroup>
   <ItemGroup>
@@ -567,6 +594,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\StudentLists\RegistrarStudentSched.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegistrarStudentSched.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\StudentLists\StudentList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StudentList.cs</LastGenOutput>

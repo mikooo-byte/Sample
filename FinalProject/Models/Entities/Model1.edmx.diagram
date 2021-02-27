@@ -4,27 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7f35dfbe95b04f9ab21d9ce7023ad3a9" Name="Diagram1">
-        <EntityTypeShape EntityType="RegistrationModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Admin_Acc" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Calendar" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Concern" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Infraction" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.LogAct" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Member" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Pass_Reset" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RegistrationModel.Grade" Width="1.5" PointX="5" PointY="7.75" />
-        <EntityTypeShape EntityType="RegistrationModel.Campu" Width="2.125" PointX="12.625" PointY="7.875" />
-        <EntityTypeShape EntityType="RegistrationModel.Professor" Width="1.5" PointX="9.125" PointY="9.625" />
-        <EntityTypeShape EntityType="RegistrationModel.Section" Width="1.5" PointX="9.375" PointY="3.75" />
-        <EntityTypeShape EntityType="RegistrationModel.Subject" Width="1.5" PointX="7.25" PointY="9.5" />
-        <EntityTypeShape EntityType="RegistrationModel.StudentInfo" Width="1.5" PointX="2.875" PointY="7.75" />
-        <EntityTypeShape EntityType="RegistrationModel.sysdiagram" Width="1.5" PointX="9.375" PointY="0.75" />
-        <AssociationConnector Association="RegistrationModel.FK_Grade_Grade" />
-        <AssociationConnector Association="RegistrationModel.FK_Subject_Professor" />
-        <EntityTypeShape EntityType="RegistrationModel.YearLevel" Width="1.5" PointX="9.375" PointY="6.75" />
-        <AssociationConnector Association="RegistrationModel.FK_Grade_Professor" />
-        <EntityTypeShape EntityType="RegistrationModel.ResetCode" Width="1.5" PointX="11.375" PointY="0.75" />
+      <Diagram DiagramId="b6f0e231e21a42809b9e22c04f8a76da" Name="Diagram1">
+        <EntityTypeShape EntityType="RegistrationModel.Account" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Admin_Acc" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Calendar" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Campu" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Concern" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Grade" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Infraction" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.LogAct" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Member" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Pass_Reset" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Professor" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.ResetCode" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Schedule" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Section" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.StudentInfo" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.Subject" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.sysdiagram" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RegistrationModel.YearLevel" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="RegistrationModel.FK_Grade_Professor" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistrationModel.FK_Grade_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="RegistrationModel.FK_Subject_Professor" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -10,9 +10,8 @@
 namespace FinalProject.Models.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class StudentPersonalGrade_Result
     {
         public int id { get; set; }
         public string Studentnum { get; set; }
@@ -29,8 +28,13 @@ namespace FinalProject.Models.Entities
         public string Remarks { get; set; }
         public Nullable<int> IdProf { get; set; }
         public string ProfName { get; set; }
-    
-        public virtual Professor Professor { get; set; }
-        public virtual Subject Subject1 { get; set; }
+        public string SubjectCode { get; set; }
+        public string Subject1 { get; set; }
+        public Nullable<int> Unit1 { get; set; }
+        public Nullable<int> IdProfessor { get; set; }
+        public int IdProf1 { get; set; }
+        public string LastName1 { get; set; }
+        public string FirstName1 { get; set; }
+        public string CompleteName { get; set; }
     }
 }

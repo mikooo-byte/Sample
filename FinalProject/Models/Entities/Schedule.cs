@@ -12,10 +12,15 @@ namespace FinalProject.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ResetCode
+    public partial class Schedule
     {
-        public int RC_id { get; set; }
-        public string Studentnum { get; set; }
+        public int S_id { get; set; }
         public string Code { get; set; }
+        public string Subject { get; set; }
+        public string Unit { get; set; }
+        public string Room { get; set; }
+        public string Day { get; set; }
+        public string Time { get; set; }
+        public string Professor { get; set; }
     }
 }

@@ -10,12 +10,10 @@
 namespace FinalProject.Models.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ResetCode
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int RC_id { get; set; }
-        public string Studentnum { get; set; }
-        public string Code { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

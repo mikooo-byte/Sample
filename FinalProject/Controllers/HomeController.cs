@@ -52,7 +52,7 @@ namespace FinalProject.Controllers
             {
                 if (Session["Username"] != null)
                 {
-                    return RedirectToAction("Index", "Student");
+                    return RedirectToAction("Announcements", "Student");
                 }
             }
              return View();
@@ -63,7 +63,7 @@ namespace FinalProject.Controllers
             {
                 if (Session["Username"] != null)
                 {
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Announcements", "Admin");
                 }                
             }
             return View();

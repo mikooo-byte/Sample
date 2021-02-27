@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "StudentsProfile";
+    Layout = "~/Views/Shared/_Student.cshtml";
+}
+
+<h2>StudentsProfile</h2>
+
+
+
+<h5>Student Number:</h5>
+<h4>@Session["UserName"].ToString()</h4>
+<br>
+<h5>Last Name:</h5>
+<h4>@Session["Lastname"].ToString()</h4>
+<br>
+<h5>Firstname:</h5>
+<h4>@Session["Firstname"].ToString()</h4>
+<br>
+<h5>Middle Name:</h5>
+<h4>@Session["Middlename"].ToString()</h4>
+<br>
+<h5>Gender:</h5>
+<h4>@Session["Sex"].ToString()</h4>
+<br>
+<h5>Home Address:</h5>
+<h4>@Session["Address"].ToString()</h4>
