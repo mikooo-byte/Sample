@@ -22,5 +22,11 @@ namespace FinalProject.Models.Entities
         public string Day { get; set; }
         public string Time { get; set; }
         public string Professor { get; set; }
+        public Nullable<int> SectionId { get; set; }
+        public Nullable<int> YearId { get; set; }
+    
+        public virtual Section Section { get; set; }
+        public virtual Subject Subject1 { get; set; }
+        public virtual YearLevel YearLevel { get; set; }
     }
 }

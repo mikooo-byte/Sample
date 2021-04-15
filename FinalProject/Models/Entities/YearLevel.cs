@@ -14,7 +14,17 @@ namespace FinalProject.Models.Entities
     
     public partial class YearLevel
     {
-        public string YearId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public YearLevel()
+        {
+            this.Schedules = new HashSet<Schedule>();
+        }
+    
+        public int YearId { get; set; }
         public string YearLevel1 { get; set; }
+        public string Course { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

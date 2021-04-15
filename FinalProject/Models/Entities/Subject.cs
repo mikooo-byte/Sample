@@ -18,6 +18,7 @@ namespace FinalProject.Models.Entities
         public Subject()
         {
             this.Grades = new HashSet<Grade>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
         public string SubjectCode { get; set; }
@@ -28,5 +29,7 @@ namespace FinalProject.Models.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
         public virtual Professor Professor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

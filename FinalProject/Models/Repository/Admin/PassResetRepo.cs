@@ -27,7 +27,7 @@ namespace FinalProject.Models.Repository.Admin
                 r.Username = req.Username;
                 r.Email = req.Email;
                 r.Code = req.Code;
-                r.Status = req.Status;
+                r.Status = "Closed";
                 records.Add(r);
             }
 

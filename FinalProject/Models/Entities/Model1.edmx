@@ -158,6 +158,8 @@
           <Property Name="Day" Type="nvarchar" MaxLength="50" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
           <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+          <Property Name="SectionId" Type="int" />
+          <Property Name="YearId" Type="int" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -206,8 +208,9 @@
           <Key>
             <PropertyRef Name="YearId" />
           </Key>
-          <Property Name="YearId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="YearId" Type="int" Nullable="false" />
           <Property Name="YearLevel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Course" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_Grade_Professor">
           <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
@@ -230,6 +233,42 @@
             </Principal>
             <Dependent Role="Grade">
               <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="IdSection" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_YearLevel">
+          <End Role="YearLevel" Type="Self.YearLevel" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearLevel">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="YearId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,6 +348,18 @@
           <AssociationSet Name="FK_Grade_Subject" Association="Self.FK_Grade_Subject">
             <End Role="Subject" EntitySet="Subject" />
             <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Section" Association="Self.FK_Schedule_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Subject" Association="Self.FK_Schedule_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_YearLevel" Association="Self.FK_Schedule_YearLevel">
+            <End Role="YearLevel" EntitySet="YearLevel" />
+            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_Subject_Professor" Association="Self.FK_Subject_Professor">
             <End Role="Professor" EntitySet="Professor" />
@@ -477,6 +528,11 @@
           <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SectionId" Type="Int32" />
+          <Property Name="YearId" Type="Int32" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Schedule_Section" FromRole="Schedule" ToRole="Section" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK_Schedule_Subject" FromRole="Schedule" ToRole="Subject" />
+          <NavigationProperty Name="YearLevel" Relationship="Self.FK_Schedule_YearLevel" FromRole="Schedule" ToRole="YearLevel" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -484,6 +540,7 @@
           </Key>
           <Property Name="IdSection" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Section1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Section" FromRole="Section" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="StudentInfo">
           <Key>
@@ -512,6 +569,7 @@
           <Property Name="IdProfessor" Type="Int32" />
           <NavigationProperty Name="Grades" Relationship="Self.FK_Grade_Subject" FromRole="Subject" ToRole="Grade" />
           <NavigationProperty Name="Professor" Relationship="Self.FK_Subject_Professor" FromRole="Subject" ToRole="Professor" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Subject" FromRole="Subject" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -527,8 +585,10 @@
           <Key>
             <PropertyRef Name="YearId" />
           </Key>
-          <Property Name="YearId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearId" Type="Int32" Nullable="false" />
           <Property Name="YearLevel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Course" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_YearLevel" FromRole="YearLevel" ToRole="Schedule" />
         </EntityType>
         <Association Name="FK_Grade_Professor">
           <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
@@ -566,6 +626,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Schedule_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="IdSection" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_YearLevel">
+          <End Role="YearLevel" Type="Self.YearLevel" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearLevel">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RegistrationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Admin_Acc" EntityType="Self.Admin_Acc" />
@@ -596,6 +692,18 @@
           <AssociationSet Name="FK_Subject_Professor" Association="Self.FK_Subject_Professor">
             <End Role="Professor" EntitySet="Professors" />
             <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Section" Association="Self.FK_Schedule_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Subject" Association="Self.FK_Schedule_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_YearLevel" Association="Self.FK_Schedule_YearLevel">
+            <End Role="YearLevel" EntitySet="YearLevels" />
+            <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -880,6 +988,8 @@
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -935,6 +1045,7 @@
               <MappingFragment StoreEntitySet="YearLevel">
                 <ScalarProperty Name="YearId" ColumnName="YearId" />
                 <ScalarProperty Name="YearLevel1" ColumnName="YearLevel" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
